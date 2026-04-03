@@ -24,6 +24,9 @@ function App() {
       <motion.div variants={sectionVariants} initial="hidden" whileInView="visible" viewport={{ once: true, margin: '-80px' }}>
         <OutcomeSection />
       </motion.div>
+      <footer className="app-footer">
+        <p>© 2026 AX팀. All rights reserved.</p>
+      </footer>
     </div>
   )
 }

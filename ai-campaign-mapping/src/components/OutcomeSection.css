@@ -192,6 +192,58 @@
   letter-spacing: 0.05em;
 }
 
+/* TIME — count-up */
+.time-counter-wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  align-items: flex-end;
+}
+
+.time-counter-trigger {
+  position: absolute;
+  pointer-events: none;
+}
+
+.time-counter-row {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.time-counter-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.time-counter-label.muted { color: var(--text-muted); }
+.time-counter-label.accent { color: var(--accent); }
+
+.time-counter-num-row {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.time-counter-num {
+  font-size: 2.4rem;
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.time-counter-num.muted { color: var(--text-muted); }
+.time-counter-num.accent { color: var(--accent); }
+
+.time-counter-unit {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.time-counter-unit.muted { color: var(--text-muted); }
+.time-counter-unit.accent { color: var(--accent); }
+
 /* RESOURCE */
 .resource-compare {
   display: flex;

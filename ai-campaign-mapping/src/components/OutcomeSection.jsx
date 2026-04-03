@@ -49,25 +49,54 @@ function QualityContent() {
 }
 
 function TimeContent() {
+  const [beforeCount, setBeforeCount] = React.useState(0)
+  const [afterCount, setAfterCount] = React.useState(0)
+  const [started, setStarted] = React.useState(false)
+  const ref = React.useRef(null)
+
+  React.useEffect(() => {
+    if (!started) return
+    // Before: 0 → 60, 느리게 (2.5초)
+    const bStart = performance.now()
+    const bDuration = 2500
+    const tick = (now) => {
+      const progress = Math.min((now - bStart) / bDuration, 1)
+      setBeforeCount(Math.floor(progress * 60))
+      if (progress < 1) requestAnimationFrame(tick)
+    }
+    requestAnimationFrame(tick)
+
+    // After: 0 → 1.5, 빠르게 (0.3초), 동시에 시작
+    const aStart = performance.now()
+    const aDuration = 300
+    const aTick = (now) => {
+      const progress = Math.min((now - aStart) / aDuration, 1)
+      setAfterCount(+(progress * 1.5).toFixed(1))
+      if (progress < 1) requestAnimationFrame(aTick)
+    }
+    requestAnimationFrame(aTick)
+  }, [started])
+
   return (
-    <div className="time-bars">
-      <div className="time-bar-col">
-        <span className="time-bar-label muted">60시간</span>
-        <div className="time-bar-track">
-          <motion.div className="time-bar-fill before"
-            initial={{ height: 0 }} whileInView={{ height: '100%' }}
-            viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.2 }} />
+    <div className="time-counter-wrapper" ref={ref}>
+      <motion.div
+        className="time-counter-trigger"
+        onViewportEnter={() => setStarted(true)}
+        viewport={{ once: true }}
+      />
+      <div className="time-counter-row">
+        <span className="time-counter-label muted">Before</span>
+        <div className="time-counter-num-row">
+          <span className="time-counter-num muted">{beforeCount}</span>
+          <span className="time-counter-unit muted">시간</span>
         </div>
-        <span className="time-bar-name">Before</span>
       </div>
-      <div className="time-bar-col">
-        <span className="time-bar-label accent">1.5시간</span>
-        <div className="time-bar-track">
-          <motion.div className="time-bar-fill after"
-            initial={{ height: 0 }} whileInView={{ height: '2.5%' }}
-            viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.4 }} />
+      <div className="time-counter-row">
+        <span className="time-counter-label accent">After</span>
+        <div className="time-counter-num-row">
+          <span className="time-counter-num accent">{afterCount}</span>
+          <span className="time-counter-unit accent">시간</span>
         </div>
-        <span className="time-bar-name">After</span>
       </div>
     </div>
   )
