@@ -23,28 +23,55 @@ const barVariants = {
 
 function QualityContent() {
   return (
-    <>
-      <div className="quality-metric">
-        <div className="quality-row">
-          <span className="quality-label">매핑률</span>
-          <span className="quality-value">80%</span>
+    <div className="quality-compare">
+      <div className="quality-group">
+        <span className="quality-group-label muted">Before</span>
+        <div className="quality-metric">
+          <div className="quality-row">
+            <span className="quality-label">매핑률</span>
+            <span className="quality-before">15~50%</span>
+          </div>
+          <div className="quality-bar-bg">
+            <motion.div className="quality-bar-fill-before" style={{ width: '32%' }}
+              variants={barVariants} custom={0.2} initial="hidden" whileInView="visible" viewport={{ once: true }} />
+          </div>
         </div>
-        <div className="quality-bar-bg">
-          <motion.div className="quality-bar-fill" style={{ width: '80%' }}
-            variants={barVariants} custom={0.2} initial="hidden" whileInView="visible" viewport={{ once: true }} />
+        <div className="quality-metric">
+          <div className="quality-row">
+            <span className="quality-label">정확도</span>
+            <span className="quality-before">?</span>
+          </div>
+          <div className="quality-bar-bg">
+            <motion.div className="quality-bar-fill-before" style={{ width: '0%' }}
+              variants={barVariants} custom={0.3} initial="hidden" whileInView="visible" viewport={{ once: true }} />
+          </div>
         </div>
       </div>
-      <div className="quality-metric">
-        <div className="quality-row">
-          <span className="quality-label">정확도</span>
-          <span className="quality-value">90%</span>
+      <ArrowRight size={18} className="quality-arrow" />
+      <div className="quality-group">
+        <span className="quality-group-label accent">After</span>
+        <div className="quality-metric">
+          <div className="quality-row">
+            <span className="quality-label">매핑률</span>
+            <span className="quality-value">80%</span>
+          </div>
+          <div className="quality-bar-bg">
+            <motion.div className="quality-bar-fill" style={{ width: '80%' }}
+              variants={barVariants} custom={0.4} initial="hidden" whileInView="visible" viewport={{ once: true }} />
+          </div>
         </div>
-        <div className="quality-bar-bg">
-          <motion.div className="quality-bar-fill" style={{ width: '90%' }}
-            variants={barVariants} custom={0.4} initial="hidden" whileInView="visible" viewport={{ once: true }} />
+        <div className="quality-metric">
+          <div className="quality-row">
+            <span className="quality-label">정확도</span>
+            <span className="quality-value">90%</span>
+          </div>
+          <div className="quality-bar-bg">
+            <motion.div className="quality-bar-fill" style={{ width: '90%' }}
+              variants={barVariants} custom={0.6} initial="hidden" whileInView="visible" viewport={{ once: true }} />
+          </div>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 
@@ -56,7 +83,6 @@ function TimeContent() {
 
   React.useEffect(() => {
     if (!started) return
-    // Before: 0 → 60, 느리게 (2.5초)
     const bStart = performance.now()
     const bDuration = 2500
     const tick = (now) => {
@@ -66,7 +92,6 @@ function TimeContent() {
     }
     requestAnimationFrame(tick)
 
-    // After: 0 → 1.5, 빠르게 (0.3초), 동시에 시작
     const aStart = performance.now()
     const aDuration = 300
     const aTick = (now) => {
@@ -77,6 +102,10 @@ function TimeContent() {
     requestAnimationFrame(aTick)
   }, [started])
 
+  const clockSize = 32
+  const center = clockSize / 2
+  const handLen = 10
+
   return (
     <div className="time-counter-wrapper" ref={ref}>
       <motion.div
@@ -86,13 +115,52 @@ function TimeContent() {
       />
       <div className="time-counter-row">
         <span className="time-counter-label muted">Before</span>
+        <svg className="time-clock" width={clockSize} height={clockSize} viewBox={`0 0 ${clockSize} ${clockSize}`}>
+          <circle cx={center} cy={center} r={center - 2} fill="none" stroke="var(--text-muted)" strokeWidth="1.5" opacity="0.3" />
+          {[...Array(12)].map((_, i) => {
+            const angle = (i * 30 - 90) * (Math.PI / 180)
+            const x1 = center + Math.cos(angle) * (center - 5)
+            const y1 = center + Math.sin(angle) * (center - 5)
+            const x2 = center + Math.cos(angle) * (center - 3)
+            const y2 = center + Math.sin(angle) * (center - 3)
+            return <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke="var(--text-muted)" strokeWidth="1" opacity="0.4" />
+          })}
+          <motion.line
+            x1={center} y1={center}
+            x2={center} y2={center - handLen}
+            stroke="var(--text-muted)" strokeWidth="2" strokeLinecap="round"
+            style={{ transformOrigin: `${center}px ${center}px` }}
+            animate={started ? { rotate: 360 * 60 } : { rotate: 0 }}
+            transition={{ duration: 2.5, ease: 'linear' }}
+          />
+        </svg>
         <div className="time-counter-num-row">
           <span className="time-counter-num muted">{beforeCount}</span>
           <span className="time-counter-unit muted">시간</span>
         </div>
       </div>
+      <ArrowRight size={18} className="time-counter-arrow" />
       <div className="time-counter-row">
         <span className="time-counter-label accent">After</span>
+        <svg className="time-clock" width={clockSize} height={clockSize} viewBox={`0 0 ${clockSize} ${clockSize}`}>
+          <circle cx={center} cy={center} r={center - 2} fill="none" stroke="var(--accent)" strokeWidth="1.5" opacity="0.3" />
+          {[...Array(12)].map((_, i) => {
+            const angle = (i * 30 - 90) * (Math.PI / 180)
+            const x1 = center + Math.cos(angle) * (center - 5)
+            const y1 = center + Math.sin(angle) * (center - 5)
+            const x2 = center + Math.cos(angle) * (center - 3)
+            const y2 = center + Math.sin(angle) * (center - 3)
+            return <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke="var(--accent)" strokeWidth="1" opacity="0.4" />
+          })}
+          <motion.line
+            x1={center} y1={center}
+            x2={center} y2={center - handLen}
+            stroke="var(--accent)" strokeWidth="2" strokeLinecap="round"
+            style={{ transformOrigin: `${center}px ${center}px` }}
+            animate={started ? { rotate: 360 * 1.5 } : { rotate: 0 }}
+            transition={{ duration: 0.3, ease: 'easeOut' }}
+          />
+        </svg>
         <div className="time-counter-num-row">
           <span className="time-counter-num accent">{afterCount}</span>
           <span className="time-counter-unit accent">시간</span>
@@ -110,14 +178,14 @@ function ResourceContent() {
       <span className="resource-group-label accent">After</span>
 
       <div className="resource-icons before">
-        {Array.from({ length: 15 }).map((_, i) => (
-          <Users key={`b-${i}`} size={14} className="resource-person muted" />
+        {Array.from({ length: 30 }).map((_, i) => (
+          <User key={`b-${i}`} size={11} className="resource-person muted" />
         ))}
       </div>
       <ArrowRight size={18} className="resource-arrow" />
       <div className="resource-icons after">
         {Array.from({ length: 3 }).map((_, i) => (
-          <User key={`a-${i}`} size={22} className="resource-person accent" />
+          <User key={`a-${i}`} size={26} className="resource-person accent" />
         ))}
       </div>
 
@@ -130,10 +198,16 @@ function ResourceContent() {
 
 function OperatingContent() {
   return (
-    <div className="operating-visual">
-      <span className="operating-label-muted">수동</span>
+    <div className="operating-compare">
+      <div className="operating-group">
+        <span className="operating-group-label muted">Before</span>
+        <span className="operating-value muted">수동 운영</span>
+      </div>
       <ArrowRight size={18} className="operating-arrow" />
-      <span className="operating-label-accent">자동화 100%</span>
+      <div className="operating-group">
+        <span className="operating-group-label accent">After</span>
+        <span className="operating-value accent">자동화 100%</span>
+      </div>
     </div>
   )
 }
