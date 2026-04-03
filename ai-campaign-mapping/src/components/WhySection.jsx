@@ -24,6 +24,7 @@ export default function WhySection() {
   return (
     <section className="why-section">
       <div className="section">
+        <hr className="why-divider" />
         <div className="section-number">01</div>
         <div className="section-label">WHY · 왜 필요했나?</div>
 

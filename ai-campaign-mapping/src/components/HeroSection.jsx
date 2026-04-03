@@ -30,6 +30,7 @@ export default function HeroSection() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.7 }}
         >
+          연 10만 건 이상의 캠페인 맵핑을 AI로 자동화한 CJ Mezzomedia AX팀의 여정
         </motion.p>
       </div>
     </section>

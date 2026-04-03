@@ -1,6 +1,12 @@
 .why-section {
 }
 
+.why-divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: -20px 0 24px;
+}
+
 .why-layout {
   display: grid;
   grid-template-columns: 1fr 1fr;
