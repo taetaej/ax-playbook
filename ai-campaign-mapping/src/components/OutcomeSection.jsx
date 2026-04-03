@@ -1,6 +1,6 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import { Award, Clock, Users, Settings, ArrowRight, CheckCircle } from 'lucide-react'
+import { Award, Clock, Users, Settings, ArrowRight, CheckCircle, User } from 'lucide-react'
 import './OutcomeSection.css'
 
 const cardVariants = {
@@ -104,18 +104,26 @@ function TimeContent() {
 
 function ResourceContent() {
   return (
-    <div className="resource-compare">
-      <div className="resource-item">
-        <span className="resource-num muted">30</span>
-        <span className="resource-text">명</span>
-        <span className="resource-freq muted">주 1회</span>
+    <div className="resource-visual">
+      <span className="resource-group-label muted">Before</span>
+      <span className="resource-arrow-cell" />
+      <span className="resource-group-label accent">After</span>
+
+      <div className="resource-icons before">
+        {Array.from({ length: 15 }).map((_, i) => (
+          <Users key={`b-${i}`} size={14} className="resource-person muted" />
+        ))}
       </div>
       <ArrowRight size={18} className="resource-arrow" />
-      <div className="resource-item">
-        <span className="resource-num accent">3</span>
-        <span className="resource-text">명</span>
-        <span className="resource-freq accent">월 1회</span>
+      <div className="resource-icons after">
+        {Array.from({ length: 3 }).map((_, i) => (
+          <User key={`a-${i}`} size={22} className="resource-person accent" />
+        ))}
       </div>
+
+      <span className="resource-group-info muted">30명 · 주 1회</span>
+      <span className="resource-arrow-cell" />
+      <span className="resource-group-info accent">3명 · 월 1회</span>
     </div>
   )
 }
