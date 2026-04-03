@@ -1,0 +1,180 @@
+.why-section {
+}
+
+.why-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  margin-top: 40px;
+  align-items: start;
+}
+
+.why-left .accent {
+  color: var(--accent);
+}
+
+.why-left-quote {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin-top: 16px;
+  margin-bottom: 24px;
+  line-height: 1.7;
+}
+
+.why-mini-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.why-mini-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px 18px;
+  transition: all 0.3s ease;
+}
+
+.why-mini-card:hover {
+  border-color: var(--border-accent);
+  background: var(--bg-card-hover);
+}
+
+.why-mini-icon {
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent-dim);
+  border-radius: 8px;
+  color: var(--accent);
+}
+
+.why-mini-title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.why-mini-desc {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.why-mini-tags {
+  font-size: 0.7rem;
+  color: var(--accent);
+  margin-top: 6px;
+  letter-spacing: 0.02em;
+}
+
+/* Chat area */
+.why-chat {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.bubble-row {
+  display: flex;
+}
+
+.bubble-row-right {
+  justify-content: flex-end;
+}
+
+.bubble-row-left {
+  justify-content: flex-start;
+}
+
+/* Shared bubble */
+.bubble {
+  max-width: 85%;
+  padding: 16px 20px;
+  border-radius: 16px;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  position: relative;
+}
+
+/* Question bubble - accent color, right tail */
+.bubble-question {
+  background: var(--accent);
+  color: #000;
+  border-bottom-right-radius: 4px;
+}
+
+.bubble-question::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: -8px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 0 12px 12px;
+  border-color: transparent transparent transparent var(--accent);
+}
+
+.bubble-label {
+  display: block;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+  opacity: 0.7;
+}
+
+.bubble-question p {
+  font-weight: 600;
+}
+
+/* Answer bubble - dark card, left tail */
+.bubble-answer {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  border-bottom-left-radius: 4px;
+}
+
+.bubble-answer::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: -8px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 12px 12px 0;
+  border-color: transparent var(--bg-card) transparent transparent;
+}
+
+.bubble-answer:hover {
+  border-color: var(--border-accent);
+  background: var(--bg-card-hover);
+}
+
+.bubble-sub {
+  font-size: 0.75rem;
+  color: var(--accent);
+  margin-top: 6px;
+  letter-spacing: 0.02em;
+}
+
+@media (max-width: 768px) {
+  .why-layout {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .bubble {
+    max-width: 92%;
+  }
+}

@@ -1,0 +1,114 @@
+.whathow-section {
+}
+
+.whathow-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 40px;
+}
+
+.whathow-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 36px;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.whathow-card:hover {
+  border-color: var(--border-accent);
+  background: var(--bg-card-hover);
+}
+
+.whathow-card-badge {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+/* Keyword hero area */
+.whathow-keyword-wrap {
+  position: relative;
+  margin-bottom: 28px;
+}
+
+.whathow-keyword {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: -0.02em;
+  position: relative;
+  z-index: 1;
+}
+
+.whathow-keyword-sub {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  vertical-align: middle;
+  margin: 0 2px;
+}
+
+.whathow-keyword-glow {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  width: 80px;
+  height: 80px;
+  background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+  opacity: 0.2;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.whathow-card-title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  line-height: 1.3;
+  margin-bottom: 24px;
+  color: var(--text-primary);
+}
+
+.whathow-card-title .accent {
+  color: var(--accent);
+}
+
+.whathow-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.whathow-list-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.whathow-list-icon {
+  flex-shrink: 0;
+  color: var(--accent);
+  margin-top: 2px;
+}
+
+@media (max-width: 768px) {
+  .whathow-grid {
+    grid-template-columns: 1fr;
+  }
+  .whathow-keyword {
+    font-size: 1.1rem;
+  }
+  .whathow-card-title {
+    font-size: 1.6rem;
+  }
+}
